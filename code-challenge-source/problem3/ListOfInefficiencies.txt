@@ -1,0 +1,20 @@
+List of Identified Computational Inefficiencies and Anti-patterns
+
+1/Unnecessary useMemo Dependencies:
+The useMemo dependency array includes prices, but prices is not used within the memoized calculation of sortedBalances.
+
+2/Inefficient filter and sort Logic:
+The filter and sort logic within useMemo is convoluted and may not efficiently handle the conditions, especially with getPriority checks.
+Using getPriority multiple times is computationally expensive, especially if balances is large.
+
+3/Incorrect Conditional Logic in filter:
+The lhsPriority variable is undefined within the filter callback. The intention seems to be checking the balance's priority and amount.
+
+4/Unnecessary Mapping for Formatted Balances:
+Mapping sortedBalances to create formattedBalances is redundant since formatting can be integrated into the same process.
+
+5/Unstable Keys for List Items:
+Using the index as a key in the rows map can lead to unstable keys, causing issues in React rendering.
+
+6/TypeScript Types Misuse:
+The balance object in the rows map is treated as FormattedWalletBalance, but it's actually of type WalletBalance.
